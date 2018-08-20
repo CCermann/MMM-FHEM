@@ -22,11 +22,9 @@ module.exports = NodeHelper.create({
       deviceString += element.deviceName + ',';
     });
     if (config.https) {
-      return 'https://' + config.host + ':' + config.port +
-              '/fhem?cmd=jsonlist2%20NAME=' + deviceString + '&XHR=1';
+return 'https://' + config.host + ':' + config.port + '/fhem?cmd=jsonlist2%20NAME=' + deviceString + '&XHR=1&fwcsrf=' + config.csrf_token;
     } else {
-      return 'http://' + config.host + ':' + config.port +
-              '/fhem?cmd=jsonlist2%20NAME=' + deviceString + '&XHR=1';
+      return 'http://' + config.host + ':' + config.port + '/fhem?cmd=jsonlist2%20NAME=' + deviceString + '&XHR=1&fwcsrf=' + config.csrf_token;
     }
   },
 
@@ -36,7 +34,7 @@ module.exports = NodeHelper.create({
       json: true,
     }, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        // console.log(body);
+         //console.log(body);
         callback(body);
       }
     });
@@ -59,6 +57,7 @@ module.exports = NodeHelper.create({
     var values = [];
 
     readingsName.forEach(function(element, index, array) {
+      console.log(element);
       var readingName = element;
       if (device.Readings[readingName]) {
         values.push(device.Readings[readingName].Value);
