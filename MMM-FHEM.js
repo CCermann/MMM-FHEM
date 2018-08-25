@@ -58,7 +58,7 @@ Module.register('MMM-FHEM', {
     clearTimeout(this.updateTimer);
     this.updateTimer = setTimeout(function () {
       self.sendSocketNotification('GETDATA', self.config);
-      // Log.log('FHEM new data fetched...');
+      Log.log('FHEM new data fetched...');
     }, nextLoad);
   },
 
@@ -71,7 +71,6 @@ Module.register('MMM-FHEM', {
 
     devices.forEach(function(element, index, array) {
       var device = element;
-
       var deviceWrapper = document.createElement('div');
       deviceWrapper.className = 'flex-item normal';
 
@@ -86,17 +85,18 @@ Module.register('MMM-FHEM', {
         var value = elementValue;
         var valueWrapper = document.createElement('div');
 
-        //add icon
-        if (self.config.devices[index].deviceReadings[indexValue].icon) {
-          valueWrapper.innerHTML = '<i class="dimmed ' + self.config.devices[index].deviceReadings[indexValue].icon + '"></i>';
+        // //add icon
+        if (device.icons[indexValue].toString().trim()) {
+            console.log( "trim: " + device.icons[indexValue].toString().trim() )
+            valueWrapper.innerHTML += '<i class="dimmed ' + device.icons[indexValue] + '"></i>';
         }
 
-        valueWrapper.innerHTML += value;
+          valueWrapper.innerHTML += value;
 
         // add suffix
-        if (self.config.devices[index].deviceReadings[indexValue].suffix) {
-          valueWrapper.innerHTML += self.config.devices[index].deviceReadings[indexValue].suffix;
-        }
+        // if (self.config.devices[index].deviceReadings[indexValue].suffix) {
+        //   valueWrapper.innerHTML += self.config.devices[index].deviceReadings[indexValue].suffix;
+        // }
         valueWrapper.className = 'value medium bright';
         deviceWrapper.appendChild(valueWrapper);
       });

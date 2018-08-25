@@ -18,7 +18,7 @@ cd ~/MagicMirror/modules
 
 Clone this repository:
 ```
-git clone https://github.com/BenRoe/MMM-FHEM
+git clone https://github.com/CCermann/MMM-FHEM
 ```
 
 Navigate to the new `MMM-FHEM` folder and install the node dependencies.
@@ -99,6 +99,12 @@ The following properties can be configured:
                 <b>Default value:</b> <code>false</code>
 			</td>
 		</tr>
+		        <tr>
+        			<td><code>csrf_token</code></td>
+        			<td><br>
+                        <b>FHEM Documentation:</b> <code>https://wiki.fhem.de/wiki/CsrfToken-HowTo</code><br>
+        			</td>
+        		</tr>
         <tr>
 			<td><code>devices</code></td>
 			<td>Array of objects. Object for the different FHEM devices.
